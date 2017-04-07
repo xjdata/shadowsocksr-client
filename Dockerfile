@@ -35,7 +35,7 @@ WORKDIR ~/shadowsocks
 
 CMD python ~/shadowsocks/local.py \
               -s "$SERVER_ADDR" \
-              -p "$SERVER_ADDR" \
+              -p "$SERVER_PORT" \
               -b "$LOCAL_ADDR"  \
               -l "$LOCAL_PORT"  \
               -m "$METHOD"      \
