@@ -1,0 +1,14 @@
+version: '2'
+services:
+  ssr-local:
+    image: daocloud.io/xjdata/shadowsocksr-client
+    ports:
+      - "1080:1080"
+    environment:
+      - SERVER_ADDR=your.ss-server.ip.or.domain
+      - SERVER_PORT=443
+      - PASSWORD=your.ss-server.set.password
+      - METHOD=chacha20
+      - PROTOCOL=auth_sha1_v4
+      - OBFS=tls1.2_ticket_auth
+    restart: always
