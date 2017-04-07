@@ -10,6 +10,9 @@ ENV OBFS        tls1.2_ticket_auth
 ENV TIMEOUT     300
 ENV DNS_ADDR    8.8.8.8
 ENV DNS_ADDR_2  8.8.4.4
+ENV LOCAL_ADDR  127.0.0.1
+ENV LOCAL_PORT  1080
+ENV TIMEOUT     60
 
 
 RUN apk update \
@@ -30,4 +33,14 @@ RUN wget --no-check-certificate https://github.com/breakwa11/shadowsocks/archive
 WORKDIR ~/shadowsocks
 
 
-CMD python ~/shadowsocks/local.py -s $SERVER_ADDR -p $SERVER_PORT -k $PASSWORD -m $METHOD -O $PROTOCOL -o $OBFS
+CMD python ~/shadowsocks/local.py \
+              -s "$SERVER_ADDR" \
+              -p "$SERVER_ADDR" \
+              -b "$LOCAL_ADDR"  \
+              -l "$LOCAL_PORT"  \
+              -m "$METHOD"      \
+              -k "$PASSWORD"    \
+              -O "$PROTOCOL"    \
+              -o "$OBFS"    \
+              -t "$TIMEOUT"     \
+              --fast-open
